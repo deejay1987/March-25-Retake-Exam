@@ -6,23 +6,23 @@
  */
 
 $(document).ready(function(){
-    $("body").on("click", ".campus_tour_button, .campus_tour_signup, .campus_tour_button_mobile", campus_tour_modal);
+    $("body")
+        .on("click", ".campus_tour_button, .campus_tour_signup, .campus_tour_button_mobile", campus_tour_modal)
+        .on("change", "#campus_locations_wrapper", select_campus_tour_location);
   
-     $("body").on("change", "#campus_locations_wrapper", select_campus_tour_location);
-  
-     $("#campus_tour_form_modal").on("submit", submit_campus_tour_form);
-  
-     $("#campus_tour_form_modal").on("keydown", "#campus_tour_phone_number", allow_numeric_function);
+     $("#campus_tour_form_modal")
+        .on("submit", submit_campus_tour_form)
+        .on("keydown", "#campus_tour_phone_number", allow_numeric_function);
  
      $("#campus_tour_phone_number").on("blur", check_phone_number_function);
  });
   
  /* ADDING CAMPUS TOUR DATES PER LOCATION */
  function select_campus_tour_location() {
-    var selected_campus_tour_location = $(this).val();
-    current_campus = $("#campus_locations_wrapper option:selected").attr("data-selected-campus");
-    var current_campus_direction_url = $("#campus_locations_wrapper option:selected").attr("data-selected-campus-direction");
-    var current_campus_index = $('#campus_locations_wrapper option:selected').closest("option").index();
+    let selected_campus_tour_location = $(this).val();
+    let current_campus = $("#campus_locations_wrapper option:selected").attr("data-selected-campus");
+    let current_campus_direction_url = $("#campus_locations_wrapper option:selected").attr("data-selected-campus-direction");
+    let current_campus_index = $('#campus_locations_wrapper option:selected').closest("option").index();
     let campus_locations_information = $(".campus_locations_information");
     let campus_locations_information_ul = $(".campus_locations_information ul");
     $("#date_to_attend_selectpicker option.open_house_dates").detach();
@@ -54,6 +54,7 @@ $(document).ready(function(){
         $("#date_to_attend_selectpicker .open_house_dates").removeAttr("checked");
         $(".campus_locations_information:not('.online')").removeClass("hidden");
     }
+    /* Select campus */
     if(current_campus !== campus_name.length){
         add_tour_dates();
     }
